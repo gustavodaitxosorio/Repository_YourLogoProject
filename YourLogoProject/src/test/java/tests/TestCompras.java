@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 import pages.InicialPage;
 import pages.loginPage;
+import suporte.CapturarMensagens;
 import suporte.web;
 
 public class TestCompras {
@@ -28,12 +29,12 @@ public class TestCompras {
 	
 	@After
 	public void tearDown() {
-		//navegador.quit();
+//		navegador.quit();
 	}
 	
 	@Test
 	public void testCompra1() {
-		String OrderComplete = new InicialPage(navegador)
+		new InicialPage(navegador)
 		.InicialPage()
 		.email("gustavodaitxosorio@gmail.com")
 		.senha("gustavoerica")
@@ -48,15 +49,17 @@ public class TestCompras {
 		.ProceedCheckoutSummary()
 		.ProceedCheckoutAdress()
 		.ProceedCheckoutShipping()
-		.ProceedCheckoutPaymentBankWire()
+		.ProceedCheckoutPaymentBankWire();
+		
+		String OrderComplete = new CapturarMensagens(navegador)
 		.capturarTitulo();
 		assertEquals("Your order on My Store is complete.",OrderComplete);
 		
-		String OrderAmount = new BasePage(navegador)
+		String OrderAmount = new CapturarMensagens(navegador)
 		.capturarAmount();
 		assertEquals("$137.00", OrderAmount);
 		
-		String OrderAccount = new BasePage(navegador)
+		String OrderAccount = new CapturarMensagens(navegador)
 		.capturarAccount();
 		assertEquals("Pradeep Macharla", OrderAccount);
 		
@@ -88,28 +91,48 @@ public class TestCompras {
 		.VerifyPriceChange();
 	}
 	
-/*	 Assignment 3 - Automate 'Search Product' functionality of an e-commerce website
-	 Test Case 1- Automate 'Search Product' Functionality of an e-commerce website
-	 Steps to Automate:
-	 1. Open link http://automationpractice.com/index.php
-	 2. Move your cursor over Women's link.
-	 3. Click on sub menu 'T-shirts'
-	 4. Get Name/Text of the first product displayed on the page.
-	 5. Now enter the same product name in the search bar present on top of page and click search button.
-	 6. Validate that same product is displayed on searched page with same details which were displayed on T-Shirt's page.
-*/
+
+	//comentario feito do notebook
+	
 	@Test
 	public void testSearchProduct() {
 		String ProdutoQueVaiSerPesquisado = new InicialPage(navegador)
 		.ClicarMenuSubMenu("Women","T-shirts")
 		.MouseOverSelecionarNomeProduto("Faded Short Sleeve T-shirts");
-	
-		String ProdutoQueFoiPesquisado = new BasePage(navegador)	
-		.VerificaProduto("Faded Short Sleeve T-shirts");
 		
+		String ProdutoQueFoiPesquisado = new CapturarMensagens(navegador)	
+		.VerificaProduto("Faded Short Sleeve T-shirts");
 		assertEquals(ProdutoQueVaiSerPesquisado,ProdutoQueFoiPesquisado);
+		
+	}
+	
+	@Test
+	public void testWishlistLogadoTodosProdutosWomen() {
+		new InicialPage(navegador)
+		.InicialPage()
+		.RealizarLoginSucesso("gustavodaitxosorio@gmail.com", "gustavoerica")
+		.clicarWomenPage()
+		.MouseOverEClicarWishlist("Faded Short Sleeve T-shirts", "1")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Blouse", "2")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Dress", "3")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Dress", "4")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Summer Dress", "5")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Summer Dress", "6")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Chiffon Dress", "7")
+		.clickelementPopupWishlist()
+		.clicarMyAccount()
+		.clicarWishlist()
+		.ClicarNaWishlistdesejada();
 
-}
+		
+	}
+	
 
 }
 

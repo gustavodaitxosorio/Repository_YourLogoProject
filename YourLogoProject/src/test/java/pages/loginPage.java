@@ -33,5 +33,17 @@ public class loginPage extends BasePage {
 	public String capturarMensagem(String texto) {
 		return navegador.findElement(By.xpath("//div/ol/li[text()='"+texto+"']")).getText();
 	}
+	
+	public InicialPage RealizarLoginSucesso(String email, String senha) {
+		email(email)
+		.senha(senha)
+		.clicarSignSucesso();
+		return new InicialPage(navegador);
+		
+	}
 
 }
+
+
+
+

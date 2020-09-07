@@ -34,8 +34,6 @@ public class InicialPage extends BasePage{
 		
 	}	
 	
-	
-	
 	public InicialPage MyWishlists() {
 		return this;
 	}

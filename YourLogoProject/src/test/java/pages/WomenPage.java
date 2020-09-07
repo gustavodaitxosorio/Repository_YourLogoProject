@@ -35,20 +35,43 @@ public class WomenPage extends BasePage {
 		return new DetalheProduto(navegador);
 	}
 	
-	public DetalheProduto MouseOverEClicarWishlist(String item, String numeroProduto) {
-		WebDriverWait wait = new WebDriverWait(navegador, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/a/img[@title=\""+item+"\"]")));
+	public WomenPage MouseOverEClicarWishlist(String TituloItem, String numeroProduto) {
+		WebDriverWait wait = new WebDriverWait(navegador, 15);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/a/img[@title=\""+TituloItem+"\"]")));
+		WebElement tituloproduto = navegador.findElement(By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+"\"]/ancestor::div/h5/a"));
 		
-		JavascriptExecutor jse = (JavascriptExecutor)navegador;
-		jse.executeScript("scroll(0, 800);");;
-		
-		WebElement MouseOver = navegador.findElement(By.xpath("//div/a/img[@title=\""+item+"\"]"));
-		WebElement ClicarDetalhe = navegador.findElement(By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+"\"]/span[text()='Add to cart']/ancestor::div//ancestor::div[@class=\"wishlist\"]/a[@rel=\""+numeroProduto+"]"));	
+		((JavascriptExecutor) navegador).executeScript("arguments[0].scrollIntoView(true);", tituloproduto);
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+
+		WebElement MouseOver = navegador.findElement(By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+"\"]/ancestor::div/h5/a"));
+		WebElement ClicarDetalhe = navegador.findElement(By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+"\"]/span[text()='Add to cart']/ancestor::div//ancestor::div[@class=\"wishlist\"]/a[@rel=\""+numeroProduto+"\"]"));
 		Actions passarMouseEClicar = new Actions(navegador);
 		passarMouseEClicar.moveToElement(MouseOver).moveToElement(ClicarDetalhe).click().build().perform();
-		
-		return new DetalheProduto(navegador);
+
+		return this;
 	}
+	
+	public String checkelement() {
+		return navegador.findElement(By.xpath("//div/div/div/div/div[@class=\"fancybox-inner\"]/p")).getText();
+	}
+	
+	public WomenPage clickelementPopupWishlist() {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		navegador.findElement(By.xpath("//div/div/div/a[@title=\"Close\"]")).click();
+		return this;
+	}
+
+	
 
 
 	public String MouseOverSelecionarNomeProduto(String item) {
@@ -68,5 +91,14 @@ public class WomenPage extends BasePage {
 		return ClicarDetalhe;
 	
 	}
+
+	public MyAccountPage clicarMyAccount() {
+
+		WebDriverWait wait = new WebDriverWait(navegador, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//nav/div/a[@class=\"account\"]")));
+		navegador.findElement(By.xpath("//nav/div/a[@class=\"account\"]")).click();
+		return new MyAccountPage(navegador);
+	}
+	
 
 }

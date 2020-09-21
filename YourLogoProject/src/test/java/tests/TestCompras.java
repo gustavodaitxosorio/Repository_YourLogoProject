@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 import pages.InicialPage;
 import pages.loginPage;
+import pages.WomenPage;
 import suporte.DSL;
 import suporte.web;
 
@@ -25,7 +26,7 @@ public class TestCompras {
 	private WebDriver navegador;
 	private loginPage loginPage;
 	private InicialPage InicialPage;
-	private WomanPage WomanPage;
+	private WomenPage WomenPage;
 	
 
 	@Before

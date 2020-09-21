@@ -19,7 +19,6 @@ public class WomenPage extends BasePage {
 
 	private DSL dsl;
 	
-	
 	public WomenPage(WebDriver navegador) {
 		super(navegador);
 		dsl = new DSL(navegador);

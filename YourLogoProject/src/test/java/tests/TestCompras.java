@@ -11,15 +11,22 @@ import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 import pages.InicialPage;
 import pages.loginPage;
+import suporte.DSL;
 import suporte.web;
 
 public class TestCompras {
 
-	public TestCompras() {
-		// TODO Auto-generated constructor stub
-	}
+	private DSL dsl;
+	
+//	public TestCompras() {
+//		// TODO Auto-generated constructor stub
+//	}
 	
 	private WebDriver navegador;
+	private loginPage loginPage;
+	private InicialPage InicialPage;
+	private WomanPage WomanPage;
+	
 
 	@Before
 	public void SetUp() {
@@ -33,32 +40,48 @@ public class TestCompras {
 	
 	@Test
 	public void testCompra1() {
-		String OrderComplete = new InicialPage(navegador)
-		.InicialPage()
-		.email("gustavodaitxosorio@gmail.com")
-		.senha("gustavoerica")
-		.clicarSignSucesso()
-		.clicarWomenPage()
-		.MouseOverEClicarMore("Blouse", "2")
-		.AlterarQuantidade(5)
-		.AlterarTamanho("M")
-		.AlterarCor("White")
-		.clicarAddToCart()
-		.clicarCheckout()
-		.ProceedCheckoutSummary()
-		.ProceedCheckoutAdress()
-		.ProceedCheckoutShipping()
-		.ProceedCheckoutPaymentBankWire()
-		.capturarTitulo();
-		assertEquals("Your order on My Store is complete.",OrderComplete);
+		new InicialPage(navegador);
+		InicialPage.Clicarlogin();
+		loginPage.setEmail("gustavodaitxosorio@gmail.com");
+		loginPage.setSenha("gustavoerica");
+		loginPage.SignIn();
+		InicialPage.clicarWomen();
 		
-		String OrderAmount = new BasePage(navegador)
-		.capturarAmount();
-		assertEquals("$137.00", OrderAmount);
+				
 		
-		String OrderAccount = new BasePage(navegador)
-		.capturarAccount();
-		assertEquals("Pradeep Macharla", OrderAccount);
+		
+		
+		
+		
+		
+		
+		
+//		String OrderComplete = new InicialPage(navegador)
+//		.InicialPage()
+//		.email("gustavodaitxosorio@gmail.com")
+//		.senha("gustavoerica")
+//		.clicarSignSucesso()
+//		.clicarWomenPage()
+//		.MouseOverEClicarMore("Blouse", "2")
+//		.AlterarQuantidade(5)
+//		.AlterarTamanho("M")
+//		.AlterarCor("White")
+//		.clicarAddToCart()
+//		.clicarCheckout()
+//		.ProceedCheckoutSummary()
+//		.ProceedCheckoutAdress()
+//		.ProceedCheckoutShipping()
+//		.ProceedCheckoutPaymentBankWire()
+//		.capturarTitulo();
+//		assertEquals("Your order on My Store is complete.",OrderComplete);
+//		
+//		String OrderAmount = new BasePage(navegador)
+//		.capturarAmount();
+//		assertEquals("$137.00", OrderAmount);
+//		
+//		String OrderAccount = new BasePage(navegador)
+//		.capturarAccount();
+//		assertEquals("Pradeep Macharla", OrderAccount);
 		
 	}
 
@@ -83,21 +106,25 @@ public class TestCompras {
 		.AlterarQuantidade(61)
 		.clicarAddToCart()
 		.clicarCheckout()
-		.VerifyPriceChange()
-		.AlterarQuantidadeCheckout(150)
-		.VerifyPriceChange();
-	}
+		//.VerifyPriceChange()
+		.AlterarQuantidadeCheckout(150);
+		
+		String valorUnitString = navegador.findElement(By.xpath("//tr/td/span/span[@class=\"price\"]")).getText();
+		float valorUnitFloat = Float.parseFloat(valorUnitString.substring(1));
+
+		String QtyUnitString = navegador.findElement(By.xpath("//tr/td/input[@type=\"text\"]")).getAttribute("value");
+		float QtyUnitFloat = Float.parseFloat(QtyUnitString);
+
+		String valorTotalString = navegador.findElement(By.xpath("//tbody/tr/td[@class=\"cart_total\"]/span[@class=\"price\"]")).getText();
+		float valorTotalFloat = Float.parseFloat(valorTotalString.substring(1).replaceAll(",", ""));
 	
-/*	 Assignment 3 - Automate 'Search Product' functionality of an e-commerce website
-	 Test Case 1- Automate 'Search Product' Functionality of an e-commerce website
-	 Steps to Automate:
-	 1. Open link http://automationpractice.com/index.php
-	 2. Move your cursor over Women's link.
-	 3. Click on sub menu 'T-shirts'
-	 4. Get Name/Text of the first product displayed on the page.
-	 5. Now enter the same product name in the search bar present on top of page and click search button.
-	 6. Validate that same product is displayed on searched page with same details which were displayed on T-Shirt's page.
-*/
+		float VerifyValorTotal = valorUnitFloat*QtyUnitFloat;
+		assertEquals(VerifyValorTotal,valorTotalFloat, 0.1);			
+		
+		//.VerifyPriceChange();
+	
+	}
+
 	@Test
 	public void testSearchProduct() {
 		String ProdutoQueVaiSerPesquisado = new InicialPage(navegador)

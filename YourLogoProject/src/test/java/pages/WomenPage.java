@@ -13,12 +13,25 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import suporte.DSL;
+
 public class WomenPage extends BasePage {
 
+	private DSL dsl;
+	
+	
 	public WomenPage(WebDriver navegador) {
 		super(navegador);
+		dsl = new DSL(navegador);
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void clicarMore() {
+		
+	}
+	
+	
+	
 	
 	public DetalheProduto MouseOverEClicarMore(String item, String numeroProduto) {
 		WebDriverWait wait = new WebDriverWait(navegador, 10);

@@ -7,22 +7,35 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import suporte.DSL;
+
 public class InicialPage extends BasePage{
 
+	private DSL dsl;
+	
 	public InicialPage(WebDriver navegador) {
 		super(navegador);
+		dsl = new DSL(navegador);
 		// TODO Auto-generated constructor stub
 	}
 	
-	public loginPage InicialPage() {
-		navegador.findElement(By.xpath("//div/a[@class='login']")).click();		
-		return new loginPage(navegador);
+	public void Clicarlogin() {
+		dsl.clicarbotao(By.xpath("//div/a[@class='login']"));
 	}
 	
-	public WomenPage clicarWomenPage() {
-		navegador.findElement(By.xpath("//li/a[text()='Women']")).click();
-		return new WomenPage(navegador);
+//	public loginPage InicialPage() {
+//		navegador.findElement(By.xpath("//div/a[@class='login']")).click();		
+//		return new loginPage(navegador);
+//	}
+	
+	public void clicarWomen() {
+		dsl.clicarbotao(By.xpath("//li/a[text()='Women']"));
 	}
+	
+//	public WomenPage clicarWomenPage() {
+//		navegador.findElement(By.xpath("//li/a[text()='Women']")).click();
+//		return new WomenPage(navegador);
+//	}
 	
 	public WomenPage ClicarMenuSubMenu(String menu, String submenu) {
 		WebElement women = navegador.findElement(By.xpath("//div/ul/li/a[text()='"+menu+"']"));

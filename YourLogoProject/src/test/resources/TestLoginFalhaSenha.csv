@@ -1,0 +1,4 @@
+TestLoginFalhaSenha,email,capturarMensagem
+				   ,teste1@test.com,Password is required.
+				   ,teste2@test.com,Password is required.
+				   ,teste3@test.com,Password is required.

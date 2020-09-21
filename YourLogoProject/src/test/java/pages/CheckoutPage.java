@@ -55,22 +55,22 @@ public class CheckoutPage extends BasePage{
 		return this;
 	}	
 	
-	public CheckoutPage VerifyPriceChange() {
-		
-		String valorUnitString = navegador.findElement(By.xpath("//tr/td/span/span[@class=\"price\"]")).getText();
-		float valorUnitFloat = Float.parseFloat(valorUnitString.substring(1));
-
-		String QtyUnitString = navegador.findElement(By.xpath("//tr/td/input[@type=\"text\"]")).getAttribute("value");
-		float QtyUnitFloat = Float.parseFloat(QtyUnitString);
-
-		String valorTotalString = navegador.findElement(By.xpath("//tbody/tr/td[@class=\"cart_total\"]/span[@class=\"price\"]")).getText();
-		float valorTotalFloat = Float.parseFloat(valorTotalString.substring(1).replaceAll(",", ""));
-	
-		float VerifyValorTotal = valorUnitFloat*QtyUnitFloat;
-		assertEquals(VerifyValorTotal,valorTotalFloat, 0.1);			
-		
-		return this;
-	}
+//	public CheckoutPage VerifyPriceChange() {
+//		
+//		String valorUnitString = navegador.findElement(By.xpath("//tr/td/span/span[@class=\"price\"]")).getText();
+//		float valorUnitFloat = Float.parseFloat(valorUnitString.substring(1));
+//
+//		String QtyUnitString = navegador.findElement(By.xpath("//tr/td/input[@type=\"text\"]")).getAttribute("value");
+//		float QtyUnitFloat = Float.parseFloat(QtyUnitString);
+//
+//		String valorTotalString = navegador.findElement(By.xpath("//tbody/tr/td[@class=\"cart_total\"]/span[@class=\"price\"]")).getText();
+//		float valorTotalFloat = Float.parseFloat(valorTotalString.substring(1).replaceAll(",", ""));
+//	
+//		float VerifyValorTotal = valorUnitFloat*QtyUnitFloat;
+//		assertEquals(VerifyValorTotal,valorTotalFloat, 0.1);			
+//		
+//		return this;
+//	}
 
 
 

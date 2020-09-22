@@ -11,8 +11,12 @@ import org.openqa.selenium.WebDriver;
 import pages.BasePage;
 import pages.InicialPage;
 import pages.loginPage;
+<<<<<<< HEAD
 import pages.WomenPage;
 import suporte.DSL;
+=======
+import suporte.CapturarMensagens;
+>>>>>>> ace121fe5ccc78eea7f8bd99d9d74fb513c1d811
 import suporte.web;
 
 public class TestCompras {
@@ -36,11 +40,12 @@ public class TestCompras {
 	
 	@After
 	public void tearDown() {
-		//navegador.quit();
+//		navegador.quit();
 	}
 	
 	@Test
 	public void testCompra1() {
+<<<<<<< HEAD
 		new InicialPage(navegador);
 		InicialPage.Clicarlogin();
 		loginPage.setEmail("gustavodaitxosorio@gmail.com");
@@ -83,6 +88,36 @@ public class TestCompras {
 //		String OrderAccount = new BasePage(navegador)
 //		.capturarAccount();
 //		assertEquals("Pradeep Macharla", OrderAccount);
+=======
+		new InicialPage(navegador)
+		.InicialPage()
+		.email("gustavodaitxosorio@gmail.com")
+		.senha("gustavoerica")
+		.clicarSignSucesso()
+		.clicarWomenPage()
+		.MouseOverEClicarMore("Blouse", "2")
+		.AlterarQuantidade(5)
+		.AlterarTamanho("M")
+		.AlterarCor("White")
+		.clicarAddToCart()
+		.clicarCheckout()
+		.ProceedCheckoutSummary()
+		.ProceedCheckoutAdress()
+		.ProceedCheckoutShipping()
+		.ProceedCheckoutPaymentBankWire();
+		
+		String OrderComplete = new CapturarMensagens(navegador)
+		.capturarTitulo();
+		assertEquals("Your order on My Store is complete.",OrderComplete);
+		
+		String OrderAmount = new CapturarMensagens(navegador)
+		.capturarAmount();
+		assertEquals("$137.00", OrderAmount);
+		
+		String OrderAccount = new CapturarMensagens(navegador)
+		.capturarAccount();
+		assertEquals("Pradeep Macharla", OrderAccount);
+>>>>>>> ace121fe5ccc78eea7f8bd99d9d74fb513c1d811
 		
 	}
 
@@ -124,20 +159,53 @@ public class TestCompras {
 		
 		//.VerifyPriceChange();
 	
+<<<<<<< HEAD
 	}
 
+=======
+
+	//comentario feito do notebook
+	
+>>>>>>> ace121fe5ccc78eea7f8bd99d9d74fb513c1d811
 	@Test
 	public void testSearchProduct() {
 		String ProdutoQueVaiSerPesquisado = new InicialPage(navegador)
 		.ClicarMenuSubMenu("Women","T-shirts")
 		.MouseOverSelecionarNomeProduto("Faded Short Sleeve T-shirts");
-	
-		String ProdutoQueFoiPesquisado = new BasePage(navegador)	
-		.VerificaProduto("Faded Short Sleeve T-shirts");
 		
+		String ProdutoQueFoiPesquisado = new CapturarMensagens(navegador)	
+		.VerificaProduto("Faded Short Sleeve T-shirts");
 		assertEquals(ProdutoQueVaiSerPesquisado,ProdutoQueFoiPesquisado);
+		
+	}
+	
+	@Test
+	public void testWishlistLogadoTodosProdutosWomen() {
+		new InicialPage(navegador)
+		.InicialPage()
+		.RealizarLoginSucesso("gustavodaitxosorio@gmail.com", "gustavoerica")
+		.clicarWomenPage()
+		.MouseOverEClicarWishlist("Faded Short Sleeve T-shirts", "1")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Blouse", "2")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Dress", "3")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Dress", "4")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Summer Dress", "5")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Summer Dress", "6")
+		.clickelementPopupWishlist()
+		.MouseOverEClicarWishlist("Printed Chiffon Dress", "7")
+		.clickelementPopupWishlist()
+		.clicarMyAccount()
+		.clicarWishlist()
+		.ClicarNaWishlistdesejada();
 
-}
+		
+	}
+	
 
 }
 

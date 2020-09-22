@@ -48,12 +48,5 @@ public class DetalheProduto extends BasePage{
 		navegador.findElement(By.xpath("//div/a[@title=\"Proceed to checkout\"]")).click();
 		return new CheckoutPage(navegador);	
 	}
-	
-	public String checkelement() {
-
-		return navegador.findElement(By.xpath("//div/div/div/div/p[text()='You must be logged in to manage your wishlist.']")).getText();
-		
-	}
-
 
 }

@@ -39,7 +39,7 @@ public class YourLogoClass {
 	
 	navegador.findElement(By.id("SubmitLogin")).click();
 	
-	//navegador.quit();
+	navegador.quit();
 	
 	}
 

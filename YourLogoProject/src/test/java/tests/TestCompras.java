@@ -9,14 +9,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import pages.BasePage;
+import pages.DetalheProdutoPage;
+import pages.CheckoutPage;
 import pages.InicialPage;
 import pages.loginPage;
-<<<<<<< HEAD
 import pages.WomenPage;
 import suporte.DSL;
-=======
-import suporte.CapturarMensagens;
->>>>>>> ace121fe5ccc78eea7f8bd99d9d74fb513c1d811
 import suporte.web;
 
 public class TestCompras {
@@ -28,97 +26,78 @@ public class TestCompras {
 //	}
 	
 	private WebDriver navegador;
+
 	private loginPage loginPage;
 	private InicialPage InicialPage;
 	private WomenPage WomenPage;
+	private DetalheProdutoPage DetalheProdutoPage;
+	private CheckoutPage CheckoutPage;
 	
 
 	@Before
 	public void SetUp() {
 		navegador = web.AbrirNavegador();
+		dsl = new DSL(navegador);
+		InicialPage = new InicialPage(navegador);
+		loginPage = new loginPage(navegador);
+		WomenPage = new WomenPage(navegador);
+		DetalheProdutoPage = new DetalheProdutoPage(navegador);
+		CheckoutPage = new CheckoutPage(navegador);
 	}
 	
 	@After
 	public void tearDown() {
-//		navegador.quit();
+		//navegador.quit();
 	}
 	
 	@Test
 	public void testCompra1() {
-<<<<<<< HEAD
 		new InicialPage(navegador);
 		InicialPage.Clicarlogin();
 		loginPage.setEmail("gustavodaitxosorio@gmail.com");
 		loginPage.setSenha("gustavoerica");
 		loginPage.SignIn();
 		InicialPage.clicarWomen();
+		WomenPage.clicarMore("Blouse","2");
+		DetalheProdutoPage.alterarQtd(2);
+		DetalheProdutoPage.alterarTam("M");
+		DetalheProdutoPage.MudarCor("White");
+		DetalheProdutoPage.ClicaAddCart();
+		DetalheProdutoPage.clicarCheckoutProd();
+		CheckoutPage.clicarCheckoutSummary();
+		CheckoutPage.ClicarCheckoutAdress();
+		CheckoutPage.ClicarCheckoutShipping();
+		CheckoutPage.clicarCheckoutPaymentBankWire();
+		assertEquals("Your order on My Store is complete.", dsl.obterTexto(By.xpath("//div/p/strong[@class=\"dark\"]")));
+		assertEquals("$56.00", dsl.obterTexto(By.xpath("//span[@class=\"price\"]/strong")));
+		assertEquals("Pradeep Macharla",dsl.obterTexto(By.xpath("//div[3]/div/div/strong[1]")));
 		
-				
 		
-		
-		
-		
-		
-		
-		
-		
-//		String OrderComplete = new InicialPage(navegador)
-//		.InicialPage()
-//		.email("gustavodaitxosorio@gmail.com")
-//		.senha("gustavoerica")
-//		.clicarSignSucesso()
-//		.clicarWomenPage()
-//		.MouseOverEClicarMore("Blouse", "2")
-//		.AlterarQuantidade(5)
-//		.AlterarTamanho("M")
-//		.AlterarCor("White")
-//		.clicarAddToCart()
-//		.clicarCheckout()
-//		.ProceedCheckoutSummary()
-//		.ProceedCheckoutAdress()
-//		.ProceedCheckoutShipping()
-//		.ProceedCheckoutPaymentBankWire()
-//		.capturarTitulo();
-//		assertEquals("Your order on My Store is complete.",OrderComplete);
-//		
-//		String OrderAmount = new BasePage(navegador)
-//		.capturarAmount();
-//		assertEquals("$137.00", OrderAmount);
-//		
-//		String OrderAccount = new BasePage(navegador)
-//		.capturarAccount();
-//		assertEquals("Pradeep Macharla", OrderAccount);
-=======
-		new InicialPage(navegador)
-		.InicialPage()
-		.email("gustavodaitxosorio@gmail.com")
-		.senha("gustavoerica")
-		.clicarSignSucesso()
-		.clicarWomenPage()
-		.MouseOverEClicarMore("Blouse", "2")
-		.AlterarQuantidade(5)
-		.AlterarTamanho("M")
-		.AlterarCor("White")
-		.clicarAddToCart()
-		.clicarCheckout()
-		.ProceedCheckoutSummary()
-		.ProceedCheckoutAdress()
-		.ProceedCheckoutShipping()
-		.ProceedCheckoutPaymentBankWire();
-		
-		String OrderComplete = new CapturarMensagens(navegador)
-		.capturarTitulo();
-		assertEquals("Your order on My Store is complete.",OrderComplete);
-		
-		String OrderAmount = new CapturarMensagens(navegador)
-		.capturarAmount();
-		assertEquals("$137.00", OrderAmount);
-		
-		String OrderAccount = new CapturarMensagens(navegador)
-		.capturarAccount();
-		assertEquals("Pradeep Macharla", OrderAccount);
->>>>>>> ace121fe5ccc78eea7f8bd99d9d74fb513c1d811
-		
+//		  String OrderComplete = new InicialPage(navegador) 
+//		  .InicialPage()
+//		  .email("gustavodaitxosorio@gmail.com") 
+//		  .senha("gustavoerica")
+//		  .clicarSignSucesso() 
+//		  .clicarWomenPage() 
+//		  .MouseOverEClicarMore("Blouse", "2")
+//		  .AlterarQuantidade(5) 
+//		  .AlterarTamanho("M") 
+//		  .AlterarCor("White")
+//		  .clicarAddToCart() 
+//		  .clicarCheckout() 
+//		  .ProceedCheckoutSummary()
+//		  .ProceedCheckoutAdress() 
+//		  .ProceedCheckoutShipping()
+//		  .ProceedCheckoutPaymentBankWire() 
+//		  .capturarTitulo();
+//		  assertEquals("Your order on My Store is complete.",OrderComplete);
+//		  
+//		  String OrderAmount = new BasePage(navegador) .capturarAmount();
+//		  assertEquals("$137.00", OrderAmount);
+//		  
+//		  String OrderAccount = new BasePage(navegador) .capturarAccount();
+//		  assertEquals("Pradeep Macharla", OrderAccount);
+		 		
 	}
 
 	@Test
@@ -159,53 +138,20 @@ public class TestCompras {
 		
 		//.VerifyPriceChange();
 	
-<<<<<<< HEAD
 	}
 
-=======
-
-	//comentario feito do notebook
-	
->>>>>>> ace121fe5ccc78eea7f8bd99d9d74fb513c1d811
 	@Test
 	public void testSearchProduct() {
 		String ProdutoQueVaiSerPesquisado = new InicialPage(navegador)
 		.ClicarMenuSubMenu("Women","T-shirts")
 		.MouseOverSelecionarNomeProduto("Faded Short Sleeve T-shirts");
-		
-		String ProdutoQueFoiPesquisado = new CapturarMensagens(navegador)	
+	
+		String ProdutoQueFoiPesquisado = new BasePage(navegador)	
 		.VerificaProduto("Faded Short Sleeve T-shirts");
+		
 		assertEquals(ProdutoQueVaiSerPesquisado,ProdutoQueFoiPesquisado);
-		
-	}
-	
-	@Test
-	public void testWishlistLogadoTodosProdutosWomen() {
-		new InicialPage(navegador)
-		.InicialPage()
-		.RealizarLoginSucesso("gustavodaitxosorio@gmail.com", "gustavoerica")
-		.clicarWomenPage()
-		.MouseOverEClicarWishlist("Faded Short Sleeve T-shirts", "1")
-		.clickelementPopupWishlist()
-		.MouseOverEClicarWishlist("Blouse", "2")
-		.clickelementPopupWishlist()
-		.MouseOverEClicarWishlist("Printed Dress", "3")
-		.clickelementPopupWishlist()
-		.MouseOverEClicarWishlist("Printed Dress", "4")
-		.clickelementPopupWishlist()
-		.MouseOverEClicarWishlist("Printed Summer Dress", "5")
-		.clickelementPopupWishlist()
-		.MouseOverEClicarWishlist("Printed Summer Dress", "6")
-		.clickelementPopupWishlist()
-		.MouseOverEClicarWishlist("Printed Chiffon Dress", "7")
-		.clickelementPopupWishlist()
-		.clicarMyAccount()
-		.clicarWishlist()
-		.ClicarNaWishlistdesejada();
 
-		
-	}
-	
+}
 
 }
 

@@ -42,6 +42,11 @@ public class loginPage extends BasePage {
 		return dsl.obterTexto(By.xpath("//div/ol/li[text()='"+texto+"']"));
 	}
 	
+	
+	
+	
+	
+	
 	public loginPage clicarSignFalha() {
 		navegador.findElement(By.id("SubmitLogin")).click();
 		return this;

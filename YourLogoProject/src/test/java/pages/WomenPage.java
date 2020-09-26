@@ -25,27 +25,38 @@ public class WomenPage extends BasePage {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public void clicarMore() {
-		
+	public void clicarMore(String item, String numeroProduto) {
+		dsl.passarMouseClicarItem(By.xpath("//div/a/img[@title=\""+item+"\"]"), 
+				By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+
+				"\"]/span[text()='Add to cart']/ancestor::a/following-sibling::a/span[text()='More']"));
 	}
 	
 	
 	
 	
-	public DetalheProduto MouseOverEClicarMore(String item, String numeroProduto) {
-		WebDriverWait wait = new WebDriverWait(navegador, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/a/img[@title=\""+item+"\"]")));
-				
-		JavascriptExecutor jse = (JavascriptExecutor)navegador;
-		jse.executeScript("scroll(0, 800);");;
-		
-		WebElement MouseOver = navegador.findElement(By.xpath("//div/a/img[@title=\""+item+"\"]"));
-		WebElement ClicarDetalhe = navegador.findElement(By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+"\"]/span[text()='Add to cart']/ancestor::a/following-sibling::a/span[text()='More']"));	
-		Actions passarMouseEClicar = new Actions(navegador);
-		passarMouseEClicar.moveToElement(MouseOver).moveToElement(ClicarDetalhe).click().perform();
-
-		return new DetalheProduto(navegador);
-	}
+	/*
+	 * public DetalheProduto MouseOverEClicarMore(String item, String numeroProduto)
+	 * { WebDriverWait wait = new WebDriverWait(navegador, 10);
+	 * wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(
+	 * "//div/a/img[@title=\""+item+"\"]")));
+	 * 
+	 * JavascriptExecutor jse = (JavascriptExecutor)navegador;
+	 * jse.executeScript("scroll(0, 800);");
+	 * 
+	 * WebElement MouseOver =
+	 * navegador.findElement(By.xpath("//div/a/img[@title=\""+item+"\"]"));
+	 * WebElement ClicarDetalhe =
+	 * navegador.findElement(By.xpath("//div/div/div/a[@data-id-product=\""+
+	 * numeroProduto+"\"]/span[text()='Add to cart']/ancestor::a/following-sibling::a/span[text()='More']"
+	 * )); Actions passarMouseEClicar = new Actions(navegador);
+	 * passarMouseEClicar.moveToElement(MouseOver).moveToElement(ClicarDetalhe).
+	 * click().perform();
+	 * 
+	 * return new DetalheProduto(navegador); }
+	 */
+	
+	
+	
 	
 	public WomenPage MouseOverEClicarWishlist(String TituloItem, String numeroProduto) {
 		WebDriverWait wait = new WebDriverWait(navegador, 15);
@@ -85,7 +96,7 @@ public class WomenPage extends BasePage {
 
 	
 
-
+				//Esse metodo seleciona um item e escreve esse item na pesquisa de produtos e clica enter
 	public String MouseOverSelecionarNomeProduto(String item) {
 		
 		WebDriverWait wait = new WebDriverWait(navegador, 10);

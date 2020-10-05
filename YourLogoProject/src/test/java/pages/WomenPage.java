@@ -55,7 +55,9 @@ public class WomenPage extends BasePage {
 	 * return new DetalheProduto(navegador); }
 	 */
 	
-	
+	public void MouseOverEClicarWishlistDSL(String TituloItem, String numeroProduto) {
+		dsl.passarMouseClicarItem(By.xpath("//div/a/img[@title=\""+TituloItem+"\"]"), By.xpath("//div/div/div/a[@data-id-product=\""+numeroProduto+"\"]/ancestor::div/h5/a"));
+	}
 	
 	
 	public WomenPage MouseOverEClicarWishlist(String TituloItem, String numeroProduto) {

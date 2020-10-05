@@ -37,6 +37,14 @@ public class InicialPage extends BasePage{
 //		return new WomenPage(navegador);
 //	}
 	
+	public void ClicarMenuSubMenuDSL(String item, String item2) {
+		dsl.passarMouseClicarItem(By.xpath("//div/ul/li/a[text()='"+item+"']"), 
+						By.xpath("//ul/li/ul/li/ul/li/a[text()='"+item2+"']"));
+		
+		
+	}
+	
+	
 	public WomenPage ClicarMenuSubMenu(String menu, String submenu) {
 		WebElement women = navegador.findElement(By.xpath("//div/ul/li/a[text()='"+menu+"']"));
 		WebElement tshirt = navegador.findElement(By.xpath("//ul/li/ul/li/ul/li/a[text()='"+submenu+"']"));
@@ -51,3 +59,15 @@ public class InicialPage extends BasePage{
 		return this;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+

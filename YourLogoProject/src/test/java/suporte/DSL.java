@@ -56,34 +56,40 @@ public class DSL {
 
 	}
 	
+	public WebElement obterTextoWebElement(By by) {
+		return navegador.findElement(by);	
+	}
+	
+	public Object executarJS(String comando, Object ...param) {
+		JavascriptExecutor js = (JavascriptExecutor) navegador;
+		return js.executeScript(comando, param);
+		
+	}
+	
 	
 	 // Passar Mouse e selecionar item
-	public void passarMouseClicarItem(By item, By num) {
+	public void passarMouseClicarItem(By item, By item2) {
 		WebDriverWait wait = new WebDriverWait(navegador, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(item));
 			
 		JavascriptExecutor jse = (JavascriptExecutor)navegador;
 		jse.executeScript("scroll(0, 800);");
-	
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		WebElement MouseOver = navegador.findElement(item);
-		WebElement ClicarDetalhe = navegador.findElement(num);	
+		WebElement ClicarDetalhe = navegador.findElement(item2);	
 		Actions passarMouseEClicar = new Actions(navegador);
 		passarMouseEClicar.moveToElement(MouseOver).moveToElement(ClicarDetalhe).click().perform();
 	
 	}
 
-//	public void alterarQuantidadeCheckoutPage(By by, int num) {
-//		WebElement qty = navegador.findElement(by);
-//		qty.clear();
-//		qty.sendKeys(""+num);
-//		try {
-//			Thread.sleep(4500);
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//	}
+
+	
+	
 
 	public void alterarQuantidadeCheckoutPage(By by, int num) {
 		WebElement qty = navegador.findElement(by);

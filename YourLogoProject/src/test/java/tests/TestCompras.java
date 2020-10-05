@@ -4,10 +4,16 @@ import static org.junit.Assert.*;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
+import suporte.Contorno;
+import suporte.Generator;
+import suporte.screenshot;
 import pages.BasePage;
 import pages.DetalheProdutoPage;
 import pages.CheckoutPage;
@@ -33,6 +39,7 @@ public class TestCompras {
 	private DetalheProdutoPage DetalheProdutoPage;
 	private CheckoutPage CheckoutPage;
 	
+	  @Rule public TestName test = new TestName();
 
 	@Before
 	public void SetUp() {
@@ -72,6 +79,19 @@ public class TestCompras {
 		assertEquals("$56.00", dsl.obterTexto(By.xpath("//span[@class=\"price\"]/strong")));
 		assertEquals("Pradeep Macharla",dsl.obterTexto(By.xpath("//div[3]/div/div/strong[1]")));
 		
+		//highlight no elemento
+		Contorno.highLight(dsl.obterTextoWebElement(By.xpath("//div/p/strong[@class=\"dark\"]")), navegador);
+		Contorno.highLight(dsl.obterTextoWebElement(By.xpath("//span[@class=\"price\"]/strong")), navegador);
+		Contorno.highLight(dsl.obterTextoWebElement(By.xpath("//div[3]/div/div/strong[1]")), navegador);
+
+		
+		//tirar foto da mensagem
+		String screenshotArquivo = "\\Users\\Gustavo\\Desktop\\Curso Selenium\\Output/" 
+				+ Generator.dataHoraParaArquivo() + test.getMethodName() + ".png";
+		screenshot.tirar(navegador, screenshotArquivo);
+
+
+		
 		
 //		  String OrderComplete = new InicialPage(navegador) 
 //		  .InicialPage()
@@ -101,12 +121,24 @@ public class TestCompras {
 	}
 
 	@Test
+	public void testWishlistNaoLogadoDSL() {
+		InicialPage.ClicarMenuSubMenuDSL("Women","T-shirts");
+		WomenPage.MouseOverEClicarWishlistDSL("Faded Short Sleeve T-shirts", "1");
+	}
+
+	
+	
+	
+	@Test
 	public void testWishlistNaoLogado() {
 		String wishlistPopUp = new InicialPage(navegador)
 		.ClicarMenuSubMenu("Women","T-shirts")
 		.MouseOverEClicarWishlist("Faded Short Sleeve T-shirts", "1")
 		.checkelement();
-		assertEquals("You must be logged in to manage your wishlist.", wishlistPopUp);
+		//assertEquals("You must be logged in to manage your wishlist.", wishlistPopUp);
+		WebElement element = navegador.findElement(By.xpath("//div/div/div/div/div[@class=\"fancybox-inner\"]/p"));
+		dsl.executarJS("arguments[0].setAttribute('style', arguments[1]);", 
+				element, "color: black; border: 4px solid red;");
 	}
 	
 	@Test
